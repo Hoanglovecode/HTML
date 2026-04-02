@@ -1,18 +1,20 @@
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HoangAlgoict</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    
+
     <!-- Thêm thư viện Highlight.js để tô màu code -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
-    
+
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
-        
+
         body {
             font-family: 'Inter', sans-serif;
             background-color: #f8fafc;
@@ -36,22 +38,40 @@
             position: relative;
         }
 
-        .cell.light { background-color: #f1f5f9; }
-        .cell.dark { background-color: #cbd5e1; }
-        
-        .cell.trying { background-color: #fde047; }
-        .cell.invalid { background-color: #fca5a5; }
-        .cell.valid { background-color: #86efac; }
-        
+        .cell.light {
+            background-color: #f1f5f9;
+        }
+
+        .cell.dark {
+            background-color: #cbd5e1;
+        }
+
+        .cell.trying {
+            background-color: #fde047;
+        }
+
+        .cell.invalid {
+            background-color: #fca5a5;
+        }
+
+        .cell.valid {
+            background-color: #86efac;
+        }
+
         .queen {
-            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
             animation: pop 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             z-index: 10;
         }
 
         @keyframes pop {
-            0% { transform: scale(0); }
-            100% { transform: scale(1); }
+            0% {
+                transform: scale(0);
+            }
+
+            100% {
+                transform: scale(1);
+            }
         }
 
         .log-container {
@@ -64,9 +84,10 @@
             tab-size: 4;
             white-space: pre-wrap;
             word-break: break-all;
-            margin: 0; /* Xóa margin mặc định của pre */
+            margin: 0;
+            /* Xóa margin mặc định của pre */
         }
-        
+
         /* Tùy chỉnh bo góc cho code block của Highlight.js */
         .hljs {
             border-radius: 0.5rem;
@@ -79,6 +100,7 @@
         }
     </style>
 </head>
+
 <body class="p-4 md:p-8">
     <div class="max-w-6xl mx-auto">
         <header class="mb-8 text-center">
@@ -89,17 +111,20 @@
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
             <!-- Cấu hình & Điều khiển -->
             <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
-                <h2 class="text-xl font-semibold mb-4 text-slate-700 border-b pb-2">Điều khiển</h2>
-                
+                <h2 class="text-xl font-semibold mb-4 text-slate-700 border-b pb-2">Control</h2>
+
                 <div class="space-y-6">
                     <div>
-                        <label class="block text-sm font-medium text-slate-600 mb-2">Dimension (N): <span id="n-val">8</span></label>
-                        <input type="range" id="n-size" min="4" max="10" value="8" class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-indigo-600">
+                        <label class="block text-sm font-medium text-slate-600 mb-2">Dimension (N): <span
+                                id="n-val">8</span></label>
+                        <input type="range" id="n-size" min="4" max="10" value="8"
+                            class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-indigo-600">
                     </div>
 
                     <div>
                         <label class="block text-sm font-medium text-slate-600 mb-2">Speed Levels</label>
-                        <select id="speed" class="w-full p-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 outline-none">
+                        <select id="speed"
+                            class="w-full p-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 outline-none">
                             <option value="1000">Slow</option>
                             <option value="500" selected>Normal</option>
                             <option value="100">Fast</option>
@@ -108,11 +133,13 @@
                     </div>
 
                     <div class="flex flex-col gap-2">
-                        <button id="start-btn" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-4 rounded-lg transition-colors shadow-md">
+                        <button id="start-btn"
+                            class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-4 rounded-lg transition-colors shadow-md">
                             Start mô phỏng
                         </button>
-                        <button id="reset-btn" class="w-full bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold py-3 px-4 rounded-lg transition-colors">
-                            Refine lại 
+                        <button id="reset-btn"
+                            class="w-full bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold py-3 px-4 rounded-lg transition-colors">
+                            Refine lại
                         </button>
                     </div>
                 </div>
@@ -142,16 +169,21 @@
 
         <!-- Phần Code Mẫu -->
         <div class="mt-12 bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
-            <div class="bg-slate-50 border-b border-slate-200 px-6 py-4 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+            <div
+                class="bg-slate-50 border-b border-slate-200 px-6 py-4 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
                 <h2 class="text-xl font-bold text-slate-800">Implement Mã nguồn</h2>
                 <div class="flex space-x-2 overflow-x-auto w-full sm:w-auto">
-                    <button onclick="switchTab('py')" id="tab-py" class="code-tab font-semibold px-3 py-2 transition-all active border-b-2 border-indigo-600 text-indigo-600">Python</button>
-                    <button onclick="switchTab('cpp')" id="tab-cpp" class="code-tab font-semibold px-3 py-2 transition-all text-slate-500 border-b-2 border-transparent hover:text-slate-700">C++</button>
-                    <button onclick="switchTab('java')" id="tab-java" class="code-tab font-semibold px-3 py-2 transition-all text-slate-500 border-b-2 border-transparent hover:text-slate-700">Java</button>
-                    <button onclick="switchTab('js')" id="tab-js" class="code-tab font-semibold px-3 py-2 transition-all text-slate-500 border-b-2 border-transparent hover:text-slate-700">JavaScript</button>
+                    <button onclick="switchTab('py')" id="tab-py"
+                        class="code-tab font-semibold px-3 py-2 transition-all active border-b-2 border-indigo-600 text-indigo-600">Python</button>
+                    <button onclick="switchTab('cpp')" id="tab-cpp"
+                        class="code-tab font-semibold px-3 py-2 transition-all text-slate-500 border-b-2 border-transparent hover:text-slate-700">C++</button>
+                    <button onclick="switchTab('java')" id="tab-java"
+                        class="code-tab font-semibold px-3 py-2 transition-all text-slate-500 border-b-2 border-transparent hover:text-slate-700">Java</button>
+                    <button onclick="switchTab('js')" id="tab-js"
+                        class="code-tab font-semibold px-3 py-2 transition-all text-slate-500 border-b-2 border-transparent hover:text-slate-700">JavaScript</button>
                 </div>
             </div>
-            
+
             <div class="p-6">
                 <!-- Python Code -->
                 <div id="code-py" class="code-content">
@@ -360,7 +392,7 @@ solveNQueens(board, 0, N);</code></pre>
             boardState = Array(N).fill(null).map(() => Array(N).fill(0));
             stepCount = 0;
             updateStepDisplay();
-            
+
             for (let r = 0; r < N; r++) {
                 for (let c = 0; c < N; c++) {
                     const cell = document.createElement('div');
@@ -418,7 +450,7 @@ solveNQueens(board, 0, N);</code></pre>
                     boardState[row][col] = 1;
                     addLog(`Hàng ${row}: Đặt tại cột ${col}`, "success");
                     if (await solve(row + 1)) return true;
-                    
+
                     if (animationAborted) return false;
                     boardState[row][col] = 0;
                     cell.classList.remove('valid');
@@ -460,7 +492,7 @@ solveNQueens(board, 0, N);</code></pre>
 
         function switchTab(lang) {
             const langs = ['cpp', 'py', 'java', 'js'];
-            
+
             // Ẩn tất cả và reset style tab
             langs.forEach(l => {
                 document.getElementById(`code-${l}`).classList.add('hidden');
@@ -479,4 +511,5 @@ solveNQueens(board, 0, N);</code></pre>
         window.onload = initBoard;
     </script>
 </body>
+
 </html>
