@@ -22,14 +22,3 @@ Thuật toán hoạt động theo nguyên tắc:
 1.  **Đặt quân hậu:** Cố gắng đặt một quân hậu vào từng hàng, bắt đầu từ hàng trên cùng.
 2.  **Kiểm tra tính hợp lệ:** Trước khi đặt, kiểm tra xem quân hậu mới có bị quân hậu nào đã đặt trước đó tấn công không (cùng cột, cùng đường chéo).
 3.  **Quay lui (Backtracking):** Nếu không thể đặt quân hậu ở hàng hiện tại, hoặc đã thử hết các cột mà không tìm được lời giải, thuật toán sẽ quay lại hàng trước đó và di chuyển quân hậu ở hàng đó sang cột tiếp theo.
-4.  ### Cách sử dụng file này hiệu quả:
-
-1.  **Tạo file mới:** Trong thư mục `backtracking-app` trên GitHub, bạn nhấn **Add file** -> **Create new file**.
-2.  **Đặt tên:** `README-NQueens.md`.
-3.  **Dán nội dung:** Copy đoạn code Markdown ở trên và dán vào.
-4.  **Thay link ảnh (Quan trọng nhất để "nổi bật"):**
-    * Bạn hãy chụp lại màn hình đẹp nhất của dự án (như ảnh N=10).
-    * Tải ảnh đó lên một thư mục nào đó trong repo (ví dụ tạo thư mục `images` bên trong `backtracking-app`).
-    * Sửa lại link ảnh ở dòng số 6 trong đoạn Markdown trên: `https://github.com/Hoanglovecode/AlgoVisualizer/raw/main/backtracking-app/images/ten-anh-cua-ban.png`.
-
-Làm như vậy thì khi ai đó vào thư mục N-Hậu, họ sẽ thấy ngay hướng dẫn và hình ảnh demo rất chuyên nghiệp!
